@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Video Diario</title>
+  <title>Video Diario Playlist</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background: black;
-      overflow: hidden;
       height: 100%;
       width: 100%;
     }
+
     video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      background: black;
     }
   </style>
 </head>
 <body>
-  <video id="videoPlayer" autoplay muted playsinline></video>
+  <video id="videoPlayer" controls autoplay muted></video>
 
   <script>
     const videos = [
@@ -41,8 +41,8 @@
       playVideo(currentVideo);
     });
 
-    player.addEventListener("error", (e) => {
-      console.error("Error con el video:", videos[currentVideo], e);
+    player.addEventListener("error", () => {
+      console.error("Error cargando:", videos[currentVideo]);
     });
 
     // Iniciar
