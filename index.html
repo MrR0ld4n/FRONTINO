@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Diario Playlist</title>
+</head>
+<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background:black;">
+  <video id="videoPlayer" width="100%" controls autoplay muted></video>
+
+  <script>
+    const videos = [
+      "video1.mp4",
+      "video2.mp4",
+      "video3.mp4"
+    ];
+
+    let currentVideo = 0;
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    function playNextVideo() {
+      videoPlayer.src = videos[currentVideo];
+      videoPlayer.load(); // Asegura que se recargue el video
+      videoPlayer.play();
+    }
+
+    videoPlayer.addEventListener('ended', () => {
+      currentVideo = (currentVideo + 1) % videos.length;
+      playNextVideo();
+    });
+
+    videoPlayer.addEventListener('error', (e) => {
+      console.error("Error al cargar video:", videos[currentVideo], e);
+    });
+
+    // Inicializar
+    playNextVideo();
+  </script>
+</body>
+</html>
