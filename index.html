@@ -9,8 +9,7 @@
   <script>
     const videos = [
       "video1.mp4",
-      "video2.mp4",
-      "video3.mp4"
+      "video2.mp4"
     ];
 
     let currentVideo = 0;
@@ -18,7 +17,7 @@
 
     function playNextVideo() {
       videoPlayer.src = videos[currentVideo];
-      videoPlayer.load(); // Asegura que se recargue el video
+      videoPlayer.load();
       videoPlayer.play();
     }
 
