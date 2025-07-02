@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Video Diario - Vimeo</title>
+  <title>Video Diario</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
 </head>
-<body style="margin:0; padding:0; background:black;">
-  <iframe 
-    src="https://player.vimeo.com/video/1098047501?autoplay=1&loop=1&muted=0"
-    width="100%" height="100%" frameborder="0"
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowfullscreen
-    style="position:fixed; top:0; left:0; width:100vw; height:100vh;">
-  </iframe>
+<body>
+  <video id="videoPlayer" autoplay muted playsinline></video>
+
+  <script>
+    const videos = [
+      "video1.mp4",
+      "video2.mp4"
+    ];
+
+    let currentVideo = 0;
+    const player = document.getElementById("videoPlayer");
+
+    function playVideo(index) {
+      player.src = videos[index];
+      player.load();
+      player.play().catch(err => console.error("Error al reproducir:", err));
+    }
+
+    player.addEventListener("ended", () => {
+      currentVideo = (currentVideo + 1) % videos.length;
+      playVideo(currentVideo);
+    });
+
+    player.addEventListener("error", (e) => {
+      console.error("Error con el video:", videos[currentVideo], e);
+    });
+
+    // Iniciar
+    playVideo(currentVideo);
+  </script>
 </body>
 </html>
